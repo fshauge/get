@@ -1,2 +1,2 @@
 # get
-Clone repositories from popular Git hosting websites.
+Clone repositories from Git providers.
