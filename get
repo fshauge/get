@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import sys
+
+# Paths
+PROVIDERS_PATH = "~/.config/get/providers.json"
+
+# Strings
+NO_PROVIDER = "No provider specified."
+UNSUPPORTED_PROVIDER = "Unsupported provider '{}'. Edit providers.json to add or remove providers."
+GIT_CLONE = "git clone {}"
+
+def error(message):
+    print(message)
+    exit(1)
+
+def main():
+    try:
+        data = open(os.path.expanduser(PROVIDERS_PATH)).read()
+        providers = json.loads(data)
+
+        if len(sys.argv) < 2:
+            error(NO_PROVIDER)
+
+        provider = sys.argv[1]
+
+        if not provider in providers:
+            error(UNSUPPORTED_PROVIDER.format(provider))
+
+        # Pass the remaining arguments to the provider
+        arguments = sys.argv[2:]
+        uri = providers[provider].format(*arguments)
+
+        # Clone the repository at the evaluated URI
+        os.system(GIT_CLONE.format(uri))
+    except FileNotFoundError as e:
+        error(e)
+    except IndexError:
+        error("Insufficient number of arguments.")
+
+main()
