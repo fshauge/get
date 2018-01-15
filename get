@@ -13,6 +13,7 @@ def error(message):
 
 def main():
     try:
+        # Load the JSON data from providers.json
         data = open(os.path.expanduser(PROVIDERS_PATH)).read()
         providers = json.loads(data)
 
