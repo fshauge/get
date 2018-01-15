@@ -31,7 +31,7 @@ def main():
         # Clone the repository at the evaluated URI
         os.system("git clone " + uri)
     except FileNotFoundError as e:
-        error(e)
+        error("Could not find " + PROVIDERS_PATH)
     except IndexError:
         error("Insufficient number of arguments.")
 
