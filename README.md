@@ -4,8 +4,7 @@ Clone repositories from Git providers.
 ## Installation
 ```bash
 $ git clone https://github.com/fshauge/get
-$ cd get
-$ ./install
+$ get/install
 ```
 
 Copy ```example/providers.json``` to ```~/.config/get/providers.json```, or create your own.
