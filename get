@@ -7,11 +7,6 @@ import sys
 # Paths
 PROVIDERS_PATH = "~/.config/get/providers.json"
 
-# Strings
-NO_PROVIDER = "No provider specified."
-UNSUPPORTED_PROVIDER = "Unsupported provider '{}'. Edit providers.json to add or remove providers."
-GIT_CLONE = "git clone {}"
-
 def error(message):
     print(message)
     exit(1)
@@ -22,19 +17,19 @@ def main():
         providers = json.loads(data)
 
         if len(sys.argv) < 2:
-            error(NO_PROVIDER)
+            error("No provider specified.")
 
         provider = sys.argv[1]
 
         if not provider in providers:
-            error(UNSUPPORTED_PROVIDER.format(provider))
+            error("Unsupported provider '{}'.".format(provider))
 
         # Pass the remaining arguments to the provider
         arguments = sys.argv[2:]
         uri = providers[provider].format(*arguments)
 
         # Clone the repository at the evaluated URI
-        os.system(GIT_CLONE.format(uri))
+        os.system("git clone " + uri)
     except FileNotFoundError as e:
         error(e)
     except IndexError:
