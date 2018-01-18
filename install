@@ -1,3 +1,5 @@
 #!/bin/sh
 
 ln -s $(pwd)/get/get /usr/local/bin/get
+mkdir -p ~/.config/get
+cp -r get/config/ ~/.config/get/
